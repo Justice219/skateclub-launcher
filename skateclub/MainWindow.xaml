@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:skateclub"
         mc:Ignorable="d"
-        Title="MainWindow" Height="627" Width="1115" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" >
+        Title="MainWindow" Height="627" Width="1115" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" Loaded="Window_Loaded" >
 
     <Window.Background>
         <ImageBrush ImageSource="/skate.png"/>
     </Window.Background>
 
     <Grid>
-        <Rectangle HorizontalAlignment="Center" Height="32" VerticalAlignment="Top" Width="1115">
+        <Rectangle x:Name="DragBar" HorizontalAlignment="Center" Height="32" VerticalAlignment="Top" Width="1115" MouseLeftButtonDown="DragBar_MouseLeftButtonDown">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
                     <GradientStop Color="#BF1E1E1E" Offset="1"/>
@@ -21,31 +21,13 @@
             </Rectangle.Fill>
         </Rectangle>
 
-        <Rectangle HorizontalAlignment="Left" Height="428" Margin="714,136,0,0" VerticalAlignment="Top" Width="336" Fill="#7F1E1E1E">
-        </Rectangle>
-
-        <Button Content="SKATE SOLO" HorizontalAlignment="Left" Margin="84,505,0,0" VerticalAlignment="Top" Height="59" Width="226" Background="#FF009CFF" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="22" Click="Button_Click">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="7"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-
-        <Button Content="MULTIPLAYER" HorizontalAlignment="Left" Margin="84,470,0,0" VerticalAlignment="Top" Height="30" Width="226" Background="#FF009CFF" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="22">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="7"/>
-                </Style>
-            </Button.Resources>
-        </Button>
         <Button Content="X" HorizontalAlignment="Left" Margin="1083,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="32" Width="32" BorderBrush="{x:Null}" Foreground="White" Background="#00DDDDDD" Click="Button_Click_1">
 
         </Button>
         <Button Content="-" HorizontalAlignment="Left" Margin="1051,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="32" Width="32" BorderBrush="{x:Null}" Foreground="White" Background="#00DDDDDD">
 
         </Button>
-        <Button Content="-" HorizontalAlignment="Left" Margin="1019,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="32" Width="32" BorderBrush="{x:Null}" Foreground="{x:Null}">
+        <Button x:Name="SettingButton" Content="-" HorizontalAlignment="Left" Margin="1019,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="32" Width="32" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="SettingButton_Click">
             <Button.Background>
                 <ImageBrush ImageSource="/icons8-settings-384.png" Stretch="Uniform">
                     <ImageBrush.RelativeTransform>
@@ -59,15 +41,154 @@
                 </ImageBrush>
             </Button.Background>
         </Button>
-        <Label Content="Launcher Logs" HorizontalAlignment="Left" Margin="825,136,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontFamily="Calibri" FontSize="18"/>
-        <Rectangle HorizontalAlignment="Left" Height="2" Margin="730,165,0,0" VerticalAlignment="Top" Width="306" Fill="#7FFFFFFF"/>
-        <RichTextBox Margin="730,173,79,74" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White">
-            <FlowDocument>
-                <Paragraph>
-                    <Run Text="RichTextBox"/>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
+
+        <Grid x:Name="MainGrid" Visibility="Visible">
+
+            <Rectangle HorizontalAlignment="Left" Height="428" Margin="700,136,0,0" VerticalAlignment="Top" Width="336" Fill="#7F1E1E1E">
+            </Rectangle>
+
+            <Button Content="SKATE SOLO" HorizontalAlignment="Left" Margin="81,505,0,0" VerticalAlignment="Top" Height="59" Width="306" Background="#FFFF214E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="22" Click="Button_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Content="MULTIPLAYER" HorizontalAlignment="Left" Margin="81,470,0,0" VerticalAlignment="Top" Height="30" Width="306" Background="#FFFF214E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="22" Click="Button_Click_2">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Label Content="Launcher Logs" HorizontalAlignment="Left" Margin="825,136,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontFamily="Calibri" FontSize="18"/>
+            <Rectangle HorizontalAlignment="Left" Height="2" Margin="718,166,0,0" VerticalAlignment="Top" Width="310" Fill="#7FFFFFFF"/>
+            <RichTextBox x:Name="LogsText" IsReadOnly="True" Margin="718,173,87,74" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionBrush="{x:Null}">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run Text=""/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+        </Grid>
+
+        <Grid x:Name="InstallGrid" Visibility="Hidden">
+
+            <Button x:Name="InstallBtn" Content="Install" HorizontalAlignment="Left" Margin="81,505,0,0" VerticalAlignment="Top" Height="59" Width="226" FontFamily="Calibri" FontSize="22" Click="InstallBtn_Click" Background="#FFFF214E" BorderBrush="{x:Null}" Foreground="White">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+
+                </Button.Resources>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="#BF1E1E1E"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+
+            </Button>
+
+            <ProgressBar x:Name="PBar" Visibility="Hidden" HorizontalAlignment="Left" Height="24" Margin="331,522,0,0" VerticalAlignment="Top" Width="692" Foreground="#FF009EF1" Background="#7F1E1E1E" BorderBrush="{x:Null}"/>
+            <Label x:Name="PLabel" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="331,520,0,0" VerticalAlignment="Top" Height="30" Width="692" Foreground="White"/>
+        </Grid>
+
+        <Grid x:Name="PlayerNameGrid" Visibility="Hidden">
+            <Rectangle HorizontalAlignment="Center" Height="122" VerticalAlignment="Center" Width="1115" Fill="#7F1E1E1E" Visibility="Visible"/>
+            <Label Content="Set Player Name" HorizontalAlignment="Center" Margin="0,262,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontFamily="Calibri" FontSize="18"/>
+            <Rectangle HorizontalAlignment="Center" Height="2" Margin="0,294,0,0" VerticalAlignment="Top" Width="298" Fill="#7FFFFFFF"/>
+            <TextBox x:Name="PlayerNameText" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="298" Height="25" Background="#FF1E1E1E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="17" TextAlignment="Center"/>
+            <Button x:Name="SaveName" Content="Set Name" HorizontalAlignment="Center" Margin="0,331,0,0" VerticalAlignment="Top" Height="23" Width="298" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="16" Background="#FFFF214E" Click="SaveName_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
+
+        <Grid x:Name="SettingsGrid" Visibility="Hidden">
+            <Rectangle HorizontalAlignment="Center" Height="216" VerticalAlignment="Center" Width="1115" Fill="#7F1E1E1E" Visibility="Visible"/>
+            <Label Content="Settings" HorizontalAlignment="Center" Margin="0,206,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontFamily="Calibri" FontSize="18"/>
+            <Rectangle HorizontalAlignment="Center" Height="2" Margin="0,238,0,0" VerticalAlignment="Top" Width="298" Fill="#7FFFFFFF"/>
+            <TextBox x:Name="PlayerNameSettingsText" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="298" Height="25" Background="#FF1E1E1E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="17" TextAlignment="Center" Margin="0,269,0,0"/>
+            <Button x:Name="SaveSettings" Content="Save Settings" HorizontalAlignment="Center" Margin="0,383,0,0" VerticalAlignment="Top" Height="23" Width="298" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="16" Background="#FFFF214E" RenderTransformOrigin="0.505,1.783" Click="SaveSettings_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <CheckBox x:Name="ShadowFix" Content="Shadow Fix (DX11)" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" Margin="0,325,0,0"/>
+            <Label Content="Player Name" HorizontalAlignment="Left" Margin="408,250,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontFamily="Calibri"/>
+        </Grid>
+
+        <Grid x:Name="ServersGrid" Visibility="Hidden">
+            <Rectangle HorizontalAlignment="Center" Height="476" Margin="0,136,0,0" VerticalAlignment="Top" Width="1077" Fill="#7F1E1E1E" Visibility="Visible"/>
+            <Label Content="Skateclub Servers" HorizontalAlignment="Center" Margin="0,136,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontFamily="Calibri" FontSize="18"/>
+            <Rectangle HorizontalAlignment="Center" Height="2" Margin="0,168,0,0" VerticalAlignment="Top" Width="1040" Fill="#7FFFFFFF"/>
+
+            <Button x:Name="ServerBtn1" Content="skateclub NA1" HorizontalAlignment="Center" Margin="0,175,0,0" VerticalAlignment="Top" Height="31" Width="1040" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="22" Click="ServerBtn1_Click" Background="#FFFF214E">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button x:Name="ServerBtn2" Content="skateclub NA2" HorizontalAlignment="Center" Margin="0,211,0,0" VerticalAlignment="Top" Height="31" Width="1040" Background="#FFFF214E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="22" Click="ServerBtn2_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+
+            <Button x:Name="ServerBtn3" Content="skateclub EU1" HorizontalAlignment="Center" Margin="0,247,0,0" VerticalAlignment="Top" Height="31" Width="1040" Background="#FFFF214E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="22" Click="ServerBtn3_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button x:Name="Back" Content="Back" HorizontalAlignment="Left" Margin="962,100,0,0" VerticalAlignment="Top" Height="31" Width="134" Background="#FFFF214E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="22" Click="Back_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Rectangle HorizontalAlignment="Center" Height="2" Margin="0,558,0,0" VerticalAlignment="Top" Width="1040" Fill="#7FFFFFFF"/>
+            <TextBox x:Name="IPText" HorizontalAlignment="Left" TextWrapping="Wrap" Text="127.0.0.1" VerticalAlignment="Top" Width="298" Height="26" Background="#FF1E1E1E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="20" TextAlignment="Center" Margin="38,570,0,0" RenderTransformOrigin="0.5,0.743"/>
+            <Button x:Name="ConnectButton" Content="Connect" HorizontalAlignment="Left" Margin="341,570,0,0" VerticalAlignment="Top" Height="26" Width="138" Background="#FFFF214E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="16" Click="ConnectButton_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="HostServerButton" Content="Host Server" HorizontalAlignment="Left" Margin="940,570,0,0" VerticalAlignment="Top" Height="26" Width="138" Background="#FFFF214E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="16" Click="HostServerButton_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
 
     </Grid>
 </Window>
