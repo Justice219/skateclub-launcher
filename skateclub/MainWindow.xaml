@@ -96,7 +96,7 @@
                         <Setter Property="CornerRadius" Value="4"/>
                     </Style>
                 </Button.Resources>
-                
+
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
@@ -161,7 +161,7 @@
                 <Button.Effect>
                     <DropShadowEffect/>
                 </Button.Effect>
-                
+
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Background" Value="LightBlue" />
@@ -273,8 +273,8 @@
             <Rectangle HorizontalAlignment="Center" Height="216" VerticalAlignment="Center" Width="1115" Fill="#7F1E1E1E" Visibility="Visible"/>
             <Label Content="Settings" HorizontalAlignment="Center" Margin="0,206,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontFamily="Calibri" FontSize="18"/>
             <Rectangle HorizontalAlignment="Center" Height="2" Margin="0,238,0,0" VerticalAlignment="Top" Width="298" Fill="#7FFFFFFF"/>
-            <TextBox x:Name="PlayerNameSettingsText" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="298" Height="25" Background="#FF1E1E1E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="17" TextAlignment="Center" Margin="0,269,0,0"/>
-            <Button x:Name="SaveSettings" Content="Save Settings" HorizontalAlignment="Center" Margin="0,383,0,0" VerticalAlignment="Top" Height="23" Width="298" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="16" Background="#FFFF214E" RenderTransformOrigin="0.505,1.783" Click="SaveSettings_Click">
+            <TextBox x:Name="PlayerNameSettingsText" HorizontalAlignment="Center" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="298" Height="25" Background="#FF1E1E1E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="17" TextAlignment="Center" Margin="0,259,0,0"/>
+            <Button x:Name="SaveSettings" Content="Save Settings" HorizontalAlignment="Center" Margin="0,383,0,0" VerticalAlignment="Top" Height="23" Width="299" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="16" Background="#FFFF214E" RenderTransformOrigin="0.505,1.783" Click="SaveSettings_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="7"/>
@@ -301,8 +301,9 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <CheckBox x:Name="ShadowFix" Content="Shadow Fix (DX11)" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" Margin="0,325,0,0"/>
-            <Label Content="Player Name" HorizontalAlignment="Left" Margin="408,250,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontFamily="Calibri"/>
+            <CheckBox x:Name="ShadowFix" Content="Shadow Fix (DX11)" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="408,289,0,0"/>
+            <Label Content="Player Name" HorizontalAlignment="Left" Margin="408,240,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontFamily="Calibri"/>
+            <CheckBox x:Name="ShowFPS" Content="Show FPS" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="408,309,0,0"/>
         </Grid>
 
         <Grid x:Name="ServersGrid" Visibility="Hidden">
@@ -452,7 +453,35 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button x:Name="HostServerButton" Content="Host Server" HorizontalAlignment="Left" Margin="940,570,0,0" VerticalAlignment="Top" Height="26" Width="138" Background="#FFFF214E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="16" Click="HostServerButton_Click">
+
+            <Button x:Name="HostServerButton" Content="Host Server" HorizontalAlignment="Left" Margin="897,570,0,0" VerticalAlignment="Top" Height="26" Width="181" Background="#FFFF214E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="16" Click="HostServerButton_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="LightBlue" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border x:Name="Border" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#b01030" TargetName="Border" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="ServerBtn4" Visibility="Hidden" Content="skateclub NA3" HorizontalAlignment="Center" Margin="0,247,0,0" VerticalAlignment="Top" Height="31" Width="1040" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="22" Click="ServerBtn4_Click" Background="#FFFF214E">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>

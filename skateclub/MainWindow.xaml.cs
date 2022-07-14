@@ -1,27 +1,17 @@
 ﻿using SharpCompress.Archives;
 using SharpCompress.Archives.Rar;
 using SharpCompress.Common;
-using SharpCompress.Readers;
 using skateclub.Properties;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using AutoUpdaterDotNET;
 
 namespace skateclub
 {
@@ -45,9 +35,28 @@ namespace skateclub
             firstProc.Start();
         }
 
+        private void ConnectToServer(string IP)
+        {
+            string launchargs = @"-DelMar.LocalPlayerDebugName " + Settings.Default.Playername + " -DelMarUI.EnableWatermark false -DelMarOnline.Enable false -Online.ClientIsPresenceEnabled false -Client.ServerIp " + IP;
+
+            if (Settings.Default.DX11)
+                launchargs += " -Render.ForceDx11 true";
+
+            if (Settings.Default.ShowFPS)
+                launchargs += " -DebugRender true";
+
+            LaunchGame(launchargs);
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if(File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\Skate.crack.exe"))
+            AutoUpdater.ShowSkipButton = false;
+            AutoUpdater.ShowRemindLaterButton = false;
+            AutoUpdater.Mandatory = true;
+            AutoUpdater.AppTitle = "skateclub";
+            AutoUpdater.Start("https://skateclub.xyz/api/updater/update.xml");
+
+            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\Skate.crack.exe"))
             {
                 MainGrid.Visibility = Visibility.Visible;
                 InstallGrid.Visibility = Visibility.Hidden;
@@ -96,37 +105,32 @@ namespace skateclub
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //Solo Game
             LaunchGame(@"-Online.ClientIsPresenceEnabled false -DelMarUI.EnableWatermark false -DelMarOnline.Enable false");
         }
 
         private void ServerBtn1_Click(object sender, RoutedEventArgs e)
         {
-            string launchargs = @"-DelMar.LocalPlayerDebugName " + Settings.Default.Playername + " -DelMarUI.EnableWatermark false -DelMarOnline.Enable false -Online.ClientIsPresenceEnabled false -Client.ServerIp " + "45.76.235.243";
-
-            if (Settings.Default.DX11)
-                launchargs += " -Render.ForceDx11 true";
-
-            LaunchGame(launchargs);
+            //NA Server 1
+            ConnectToServer("45.76.235.243");
         }
 
         private void ServerBtn2_Click(object sender, RoutedEventArgs e)
         {
-            string launchargs = @"-DelMar.LocalPlayerDebugName " + Settings.Default.Playername + " -DelMarUI.EnableWatermark false -DelMarOnline.Enable false -Online.ClientIsPresenceEnabled false -Client.ServerIp " + "144.202.75.13";
+            //NA Server 2
+            ConnectToServer("144.202.75.13");
+        }
 
-            if (Settings.Default.DX11)
-                launchargs += " -Render.ForceDx11 true";
-
-            LaunchGame(launchargs);
+        private void ServerBtn4_Click(object sender, RoutedEventArgs e)
+        {
+            //NA Server 3
+            ConnectToServer("54.39.130.229");
         }
 
         private void ServerBtn3_Click(object sender, RoutedEventArgs e)
         {
-            string launchargs = @"-DelMar.LocalPlayerDebugName " + Settings.Default.Playername + " -DelMarUI.EnableWatermark false -DelMarOnline.Enable false -Online.ClientIsPresenceEnabled false -Client.ServerIp " + "skate.axxonte.xyz";
-
-            if (Settings.Default.DX11)
-                launchargs += " -Render.ForceDx11 true";
-
-            LaunchGame(launchargs);
+            //EU Server 1
+            ConnectToServer("skate.axxonte.xyz");
         }
 
         static double ConvertBytesToMegabytes(long bytes)
@@ -178,21 +182,9 @@ namespace skateclub
             Task.Factory.StartNew(() =>
             {
                 WebClient webClient = new WebClient();
-                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client86_DownloadProgressChanged);
+                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
                 webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(client86_DownloadFileCompleted);
                 webClient.DownloadFileAsync(new Uri("https://aka.ms/vs/17/release/vc_redist.x86.exe"), AppDomain.CurrentDomain.BaseDirectory + "/deps/vc_redist.x86.exe");
-            });
-        }
-
-        void client86_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                double bytesIn = double.Parse(e.BytesReceived.ToString());
-                double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
-                double percentage = bytesIn / totalBytes * 100;
-                PLabel.Content = "Downloading: " + ConvertBytesToMegabytes(e.BytesReceived).ToString("0.00") + "MB of " + ConvertBytesToMegabytes(e.TotalBytesToReceive).ToString("0.00") + "MB";
-                PBar.Value = int.Parse(Math.Truncate(percentage).ToString());
             });
         }
 
@@ -206,21 +198,9 @@ namespace skateclub
             Task.Factory.StartNew(() =>
             {
                 WebClient webClient = new WebClient();
-                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client64_DownloadProgressChanged);
+                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
                 webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(client64_DownloadFileCompleted);
                 webClient.DownloadFileAsync(new Uri("https://aka.ms/vs/17/release/vc_redist.x64.exe"), AppDomain.CurrentDomain.BaseDirectory + "/deps/vc_redist.x64.exe");
-            });
-        }
-
-        void client64_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                double bytesIn = double.Parse(e.BytesReceived.ToString());
-                double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
-                double percentage = bytesIn / totalBytes * 100;
-                PLabel.Content = "Downloading: " + ConvertBytesToMegabytes(e.BytesReceived).ToString("0.00") + "MB of " + ConvertBytesToMegabytes(e.TotalBytesToReceive).ToString("0.00") + "MB";
-                PBar.Value = int.Parse(Math.Truncate(percentage).ToString());
             });
         }
 
@@ -280,10 +260,7 @@ namespace skateclub
                     }
                 }
 
-                Directory.Delete(AppDomain.CurrentDomain.BaseDirectory + "/skate 4/");
-                File.Delete(AppDomain.CurrentDomain.BaseDirectory + "/skateclub.rar");
-
-                Dispatcher.Invoke(() =>
+                /*Dispatcher.Invoke(() =>
                 {
                     InstallBtn.Content = "Waiting...";
                     PLabel.Content = "Please install the Microsoft Visual C++ Redistributables";
@@ -303,9 +280,15 @@ namespace skateclub
                     SecondProc.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + @"\deps\vc_redist.x64.exe";
                     SecondProc.Start();
                     SecondProc.WaitForExit();
-                }
+                }*/
 
                 StartSetName();
+
+                if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "/skate 4/"))
+                    Directory.Delete(AppDomain.CurrentDomain.BaseDirectory + "/skate 4/");
+
+                if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "/skateclub.rar"))
+                    File.Delete(AppDomain.CurrentDomain.BaseDirectory + "/skateclub.rar");
             });
         }
 
@@ -357,6 +340,7 @@ namespace skateclub
         {
             Settings.Default.Playername = PlayerNameSettingsText.Text;
             Settings.Default.DX11 = ShadowFix.IsChecked.Value;
+            Settings.Default.ShowFPS = ShowFPS.IsChecked.Value;
             Settings.Default.Save();
 
             MainGrid.Visibility = Visibility.Visible;
@@ -370,6 +354,7 @@ namespace skateclub
         {
             PlayerNameSettingsText.Text = Settings.Default.Playername;
             ShadowFix.IsChecked = Settings.Default.DX11;
+            ShowFPS.IsChecked = Settings.Default.ShowFPS;
 
             MainGrid.Visibility = Visibility.Hidden;
             InstallGrid.Visibility = Visibility.Hidden;
