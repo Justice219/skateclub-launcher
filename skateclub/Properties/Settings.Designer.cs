@@ -58,5 +58,17 @@ namespace skateclub.Properties {
                 this["ShowFPS"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HideWatermark {
+            get {
+                return ((bool)(this["HideWatermark"]));
+            }
+            set {
+                this["HideWatermark"] = value;
+            }
+        }
     }
 }

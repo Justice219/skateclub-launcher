@@ -11,6 +11,38 @@
         <ImageBrush ImageSource="/skate.png"/>
     </Window.Background>
 
+    <Window.Resources>
+        <ControlTemplate TargetType="CheckBox" x:Key="MyCheckBoxTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Path x:Name="Equis" 
+                      Stroke="Red" 
+                      StrokeThickness="2" 
+                      Height="17" Width="19" Stretch="None" 
+                      Margin="0,0,2,2"
+                      Opacity="1"
+                      >
+                    <Path.Data>
+                        <PathGeometry>
+                            <PathFigure StartPoint="3,10">
+                                <LineSegment Point="8,14" />
+                                <LineSegment Point="16,6" />
+                            </PathFigure>
+                        </PathGeometry>
+                    </Path.Data>
+                </Path>
+                <ContentPresenter Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            </StackPanel>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="true">
+                    <Setter TargetName="Equis" Property="Opacity" Value="1" />
+                </Trigger>
+                <Trigger Property="IsChecked" Value="false">
+                    <Setter TargetName="Equis" Property="Opacity" Value="0" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+
     <Grid>
 
         <Rectangle x:Name="DragBar" HorizontalAlignment="Center" Height="32" VerticalAlignment="Top" Width="1115" MouseLeftButtonDown="DragBar_MouseLeftButtonDown">
@@ -88,7 +120,7 @@
             </Button.Style>
         </Button>
 
-        <Grid x:Name="MainGrid" Visibility="Visible">
+        <Grid x:Name="MainGrid" Visibility="Hidden">
 
             <Button Content="SKATE SOLO" HorizontalAlignment="Left" Margin="61,470,0,0" VerticalAlignment="Top" Height="59" Width="306" Background="#FFFF214E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="22" Click="Button_Click">
                 <Button.Resources>
@@ -301,12 +333,13 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <CheckBox x:Name="ShadowFix" Content="Shadow Fix (DX11)" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="408,289,0,0"/>
+            <CheckBox x:Name="ShadowFix" Content="Shadow Fix (DX11)" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="408,289,0,0" Background="#FFFF214E" BorderBrush="#FF1E1E1E"/>
             <Label Content="Player Name" HorizontalAlignment="Left" Margin="408,240,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontFamily="Calibri"/>
-            <CheckBox x:Name="ShowFPS" Content="Show FPS" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="408,309,0,0"/>
+            <CheckBox x:Name="ShowFPS" Content="Debug" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="408,309,0,0" Background="#FFFF214E" BorderBrush="#FF1E1E1E"/>
+            <CheckBox x:Name="HideWatermark" Content="Hide Watermark" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="408,329,0,0" Background="#FFFF214E" BorderBrush="#FF1E1E1E" IsChecked="True"/>
         </Grid>
 
-        <Grid x:Name="ServersGrid" Visibility="Hidden">
+        <Grid x:Name="ServersGrid" Visibility="Visible">
             <Rectangle HorizontalAlignment="Center" Height="476" Margin="0,136,0,0" VerticalAlignment="Top" Width="1077" Fill="#7F1E1E1E" Visibility="Visible"/>
             <Label Content="Skateclub Servers" HorizontalAlignment="Center" Margin="0,136,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontFamily="Calibri" FontSize="18"/>
             <Rectangle HorizontalAlignment="Center" Height="2" Margin="0,168,0,0" VerticalAlignment="Top" Width="1040" Fill="#7FFFFFFF"/>
@@ -368,7 +401,7 @@
             </Button>
 
 
-            <Button x:Name="ServerBtn3" Content="skateclub EU1" HorizontalAlignment="Center" Margin="0,247,0,0" VerticalAlignment="Top" Height="31" Width="1040" Background="#FFFF214E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="22" Click="ServerBtn3_Click">
+            <Button x:Name="ServerBtn3" Content="skateclub EU1" HorizontalAlignment="Center" Margin="0,283,0,0" VerticalAlignment="Top" Height="31" Width="1040" Background="#FFFF214E" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="22" Click="ServerBtn3_Click">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>
@@ -481,7 +514,7 @@
                     </Style>
                 </Button.Style>
             </Button>
-            <Button x:Name="ServerBtn4" Visibility="Hidden" Content="skateclub NA3" HorizontalAlignment="Center" Margin="0,247,0,0" VerticalAlignment="Top" Height="31" Width="1040" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="22" Click="ServerBtn4_Click" Background="#FFFF214E">
+            <Button x:Name="ServerBtn4" Visibility="Visible" Content="skateclub NA3" HorizontalAlignment="Center" Margin="0,247,0,0" VerticalAlignment="Top" Height="31" Width="1040" Foreground="White" BorderBrush="{x:Null}" FontFamily="Calibri" FontSize="22" Click="ServerBtn4_Click" Background="#FFFF214E">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="4"/>

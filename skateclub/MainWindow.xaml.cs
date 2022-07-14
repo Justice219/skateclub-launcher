@@ -37,13 +37,16 @@ namespace skateclub
 
         private void ConnectToServer(string IP)
         {
-            string launchargs = @"-DelMar.LocalPlayerDebugName " + Settings.Default.Playername + " -DelMarUI.EnableWatermark false -DelMarOnline.Enable false -Online.ClientIsPresenceEnabled false -Client.ServerIp " + IP;
+            string launchargs = @"-DelMar.LocalPlayerDebugName " + Settings.Default.Playername + " -DelMarOnline.Enable false -Online.ClientIsPresenceEnabled false -Client.ServerIp " + IP;
 
             if (Settings.Default.DX11)
                 launchargs += " -Render.ForceDx11 true";
 
             if (Settings.Default.ShowFPS)
                 launchargs += " -DebugRender true";
+
+            if (Settings.Default.HideWatermark)
+                launchargs += " -DelMarUI.EnableWatermark false";
 
             LaunchGame(launchargs);
         }
@@ -105,8 +108,19 @@ namespace skateclub
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            string launchargs = @"-DelMar.LocalPlayerDebugName " + Settings.Default.Playername + " -Online.ClientIsPresenceEnabled false -DelMarOnline.Enable false";
+
+            if (Settings.Default.DX11)
+                launchargs += " -Render.ForceDx11 true";
+
+            if (Settings.Default.ShowFPS)
+                launchargs += " -DebugRender true";
+
+            if (Settings.Default.HideWatermark)
+                launchargs += " -DelMarUI.EnableWatermark false";
+
             //Solo Game
-            LaunchGame(@"-Online.ClientIsPresenceEnabled false -DelMarUI.EnableWatermark false -DelMarOnline.Enable false");
+            LaunchGame(launchargs);
         }
 
         private void ServerBtn1_Click(object sender, RoutedEventArgs e)
@@ -341,6 +355,7 @@ namespace skateclub
             Settings.Default.Playername = PlayerNameSettingsText.Text;
             Settings.Default.DX11 = ShadowFix.IsChecked.Value;
             Settings.Default.ShowFPS = ShowFPS.IsChecked.Value;
+            Settings.Default.HideWatermark = HideWatermark.IsChecked.Value;
             Settings.Default.Save();
 
             MainGrid.Visibility = Visibility.Visible;
@@ -355,6 +370,7 @@ namespace skateclub
             PlayerNameSettingsText.Text = Settings.Default.Playername;
             ShadowFix.IsChecked = Settings.Default.DX11;
             ShowFPS.IsChecked = Settings.Default.ShowFPS;
+            HideWatermark.IsChecked = Settings.Default.HideWatermark;
 
             MainGrid.Visibility = Visibility.Hidden;
             InstallGrid.Visibility = Visibility.Hidden;
