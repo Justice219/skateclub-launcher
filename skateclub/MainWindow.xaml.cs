@@ -97,8 +97,6 @@ namespace skateclub
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             LaunchGame(@"-Online.ClientIsPresenceEnabled false -DelMarUI.EnableWatermark false -DelMarOnline.Enable false");
-
-            LogsText.AppendText("Start solo skate session.");
         }
 
         private void ServerBtn1_Click(object sender, RoutedEventArgs e)
@@ -109,8 +107,6 @@ namespace skateclub
                 launchargs += " -Render.ForceDx11 true";
 
             LaunchGame(launchargs);
-
-            LogsText.AppendText("Joining skateclub NA1.");
         }
 
         private void ServerBtn2_Click(object sender, RoutedEventArgs e)
@@ -121,8 +117,6 @@ namespace skateclub
                 launchargs += " -Render.ForceDx11 true";
 
             LaunchGame(launchargs);
-
-            LogsText.AppendText("Joining skateclub NA2.");
         }
 
         private void ServerBtn3_Click(object sender, RoutedEventArgs e)
@@ -133,8 +127,6 @@ namespace skateclub
                 launchargs += " -Render.ForceDx11 true";
 
             LaunchGame(launchargs);
-
-            LogsText.AppendText("Joining skateclub EU1.");
         }
 
         static double ConvertBytesToMegabytes(long bytes)
@@ -354,15 +346,11 @@ namespace skateclub
                 launchargs += " -Render.ForceDx11 true";
 
             LaunchGame(launchargs);
-
-            LogsText.AppendText("Connecting to server.");
         }
 
         private void HostServerButton_Click(object sender, RoutedEventArgs e)
         {
             LaunchGame(@"-Server");
-
-            LogsText.AppendText("Starting Server.");
         }
 
         private void SaveSettings_Click(object sender, RoutedEventArgs e)
@@ -376,8 +364,6 @@ namespace skateclub
             ServersGrid.Visibility = Visibility.Hidden;
             PlayerNameGrid.Visibility = Visibility.Hidden;
             SettingsGrid.Visibility = Visibility.Hidden;
-
-            LogsText.AppendText("Saving settings.");
         }
 
         private void SettingButton_Click(object sender, RoutedEventArgs e)
