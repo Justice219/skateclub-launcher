@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("333333_1.ico")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("icons8-discord-240.png")]
 
 

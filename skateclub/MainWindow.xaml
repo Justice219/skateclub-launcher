@@ -12,6 +12,7 @@
     </Window.Background>
 
     <Grid>
+
         <Rectangle x:Name="DragBar" HorizontalAlignment="Center" Height="32" VerticalAlignment="Top" Width="1115" MouseLeftButtonDown="DragBar_MouseLeftButtonDown">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
@@ -42,7 +43,22 @@
             </Button.Background>
         </Button>
 
-        <Grid x:Name="MainGrid" Visibility="Hidden">
+        <Button x:Name="Discord" Content="      Join The Discord" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="32" Width="120" BorderBrush="{x:Null}" Foreground="White" Click="Discord_Click">
+            <Button.Background>
+                <ImageBrush ImageSource="/icons8-discord-240.png" Stretch="Uniform">
+                    <ImageBrush.RelativeTransform>
+                        <TransformGroup>
+                            <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.5" ScaleY="0.5"/>
+                            <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                            <RotateTransform CenterX="0.5" CenterY="0.5"/>
+                            <TranslateTransform X="-0.4"/>
+                        </TransformGroup>
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
+            </Button.Background>
+        </Button>
+
+        <Grid x:Name="MainGrid" Visibility="Visible">
 
             <Rectangle HorizontalAlignment="Left" Height="428" Margin="700,136,0,0" VerticalAlignment="Top" Width="336" Fill="#7F1E1E1E">
             </Rectangle>
@@ -74,7 +90,7 @@
             </RichTextBox>
         </Grid>
 
-        <Grid x:Name="InstallGrid" Visibility="Visible">
+        <Grid x:Name="InstallGrid" Visibility="Hidden">
 
             <Button x:Name="InstallBtn" Content="Install" HorizontalAlignment="Left" Margin="81,505,0,0" VerticalAlignment="Top" Height="59" Width="226" FontFamily="Calibri" FontSize="22" Click="InstallBtn_Click" Background="#FFFF214E" BorderBrush="{x:Null}" Foreground="White">
                 <Button.Resources>
@@ -100,8 +116,8 @@
 
             </Button>
 
-            <ProgressBar x:Name="PBar" Visibility="Visible" HorizontalAlignment="Left" Height="24" Margin="331,522,0,0" VerticalAlignment="Top" Width="692" Foreground="#FFFF214E" Background="#7F1E1E1E" BorderBrush="{x:Null}"/>
-            <Label x:Name="PLabel" Visibility="Visible" Content="" HorizontalAlignment="Left" Margin="331,520,0,0" VerticalAlignment="Top" Height="30" Width="692" Foreground="White"/>
+            <ProgressBar x:Name="PBar" Visibility="Hidden" HorizontalAlignment="Left" Height="24" Margin="331,522,0,0" VerticalAlignment="Top" Width="692" Foreground="#FFFF214E" Background="#7F1E1E1E" BorderBrush="{x:Null}"/>
+            <Label x:Name="PLabel" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="331,520,0,0" VerticalAlignment="Top" Height="30" Width="692" Foreground="White"/>
         </Grid>
 
         <Grid x:Name="PlayerNameGrid" Visibility="Hidden">

@@ -391,5 +391,10 @@ namespace skateclub
             PlayerNameGrid.Visibility = Visibility.Hidden;
             SettingsGrid.Visibility = Visibility.Visible;
         }
+
+        private void Discord_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://discord.gg/skateclub");
+        }
     }
 }
