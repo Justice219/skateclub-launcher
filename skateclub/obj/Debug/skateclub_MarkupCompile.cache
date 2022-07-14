@@ -4,29 +4,17 @@
 winexe
 C#
 .cs
-<<<<<<< HEAD
 C:\Users\nxmbx\Documents\GitHub\skateclub\skateclub\obj\Debug\
-=======
-D:\Code\skateclub\skateclub\skateclub\obj\Debug\
->>>>>>> 1519db2591ba906f914c68d2d7e397c042404f96
 skateclub
 none
 false
 DEBUG;TRACE
-<<<<<<< HEAD
 C:\Users\nxmbx\Documents\GitHub\skateclub\skateclub\App.xaml
 1219584333
 
 51579654133
-131-72115230
-=======
-D:\Code\skateclub\skateclub\skateclub\App.xaml
-1219584333
-
-6-502434485
-13-1310406943
->>>>>>> 1519db2591ba906f914c68d2d7e397c042404f96
+1301278483978
 MainWindow.xaml;
 
-True
+False
 

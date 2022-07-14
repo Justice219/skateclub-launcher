@@ -30,6 +30,8 @@ namespace skateclub
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool isdownloading = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -73,7 +75,12 @@ namespace skateclub
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            if(!isdownloading)
+                this.Close();
+        }
+        private void Minimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -137,6 +144,8 @@ namespace skateclub
 
         private void InstallBtn_Click(object sender, RoutedEventArgs e)
         {
+            isdownloading = true;
+
             InstallBtn.Content = "Downloading...";
             InstallBtn.IsEnabled = false;
 
@@ -319,6 +328,8 @@ namespace skateclub
                 ServersGrid.Visibility = Visibility.Hidden;
                 PlayerNameGrid.Visibility = Visibility.Visible;
                 SettingsGrid.Visibility = Visibility.Hidden;
+
+                isdownloading = false;
             });
         }
 

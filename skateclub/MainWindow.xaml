@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:skateclub"
         mc:Ignorable="d"
-        Title="MainWindow" Height="627" Width="1115" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" Loaded="Window_Loaded" >
+        Title="MainWindow" Height="627" Width="1115" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
 
     <Window.Background>
         <ImageBrush ImageSource="/skate.png"/>
@@ -24,7 +24,7 @@
         <Button Content="X" HorizontalAlignment="Left" Margin="1083,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="32" Width="32" BorderBrush="{x:Null}" Foreground="White" Background="#00DDDDDD" Click="Button_Click_1">
 
         </Button>
-        <Button Content="-" HorizontalAlignment="Left" Margin="1051,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="32" Width="32" BorderBrush="{x:Null}" Foreground="White" Background="#00DDDDDD">
+        <Button x:Name="Minimize" Content="-" HorizontalAlignment="Left" Margin="1051,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="32" Width="32" BorderBrush="{x:Null}" Foreground="White" Background="#00DDDDDD" Click="Minimize_Click">
 
         </Button>
         <Button x:Name="SettingButton" Content="-" HorizontalAlignment="Left" Margin="1019,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Height="32" Width="32" BorderBrush="{x:Null}" Foreground="{x:Null}" Click="SettingButton_Click">
@@ -42,7 +42,7 @@
             </Button.Background>
         </Button>
 
-        <Grid x:Name="MainGrid" Visibility="Visible">
+        <Grid x:Name="MainGrid" Visibility="Hidden">
 
             <Rectangle HorizontalAlignment="Left" Height="428" Margin="700,136,0,0" VerticalAlignment="Top" Width="336" Fill="#7F1E1E1E">
             </Rectangle>
@@ -74,7 +74,7 @@
             </RichTextBox>
         </Grid>
 
-        <Grid x:Name="InstallGrid" Visibility="Hidden">
+        <Grid x:Name="InstallGrid" Visibility="Visible">
 
             <Button x:Name="InstallBtn" Content="Install" HorizontalAlignment="Left" Margin="81,505,0,0" VerticalAlignment="Top" Height="59" Width="226" FontFamily="Calibri" FontSize="22" Click="InstallBtn_Click" Background="#FFFF214E" BorderBrush="{x:Null}" Foreground="White">
                 <Button.Resources>
@@ -100,8 +100,8 @@
 
             </Button>
 
-            <ProgressBar x:Name="PBar" Visibility="Hidden" HorizontalAlignment="Left" Height="24" Margin="331,522,0,0" VerticalAlignment="Top" Width="692" Foreground="#FF009EF1" Background="#7F1E1E1E" BorderBrush="{x:Null}"/>
-            <Label x:Name="PLabel" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="331,520,0,0" VerticalAlignment="Top" Height="30" Width="692" Foreground="White"/>
+            <ProgressBar x:Name="PBar" Visibility="Visible" HorizontalAlignment="Left" Height="24" Margin="331,522,0,0" VerticalAlignment="Top" Width="692" Foreground="#FFFF214E" Background="#7F1E1E1E" BorderBrush="{x:Null}"/>
+            <Label x:Name="PLabel" Visibility="Visible" Content="" HorizontalAlignment="Left" Margin="331,520,0,0" VerticalAlignment="Top" Height="30" Width="692" Foreground="White"/>
         </Grid>
 
         <Grid x:Name="PlayerNameGrid" Visibility="Hidden">
