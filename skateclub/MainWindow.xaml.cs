@@ -48,6 +48,10 @@ namespace skateclub
             if (Settings.Default.HideWatermark)
                 launchargs += " -DelMarUI.EnableWatermark false";
 
+            //Thanks skate.online
+            if (Settings.Default.EnableCosmetic)
+                launchargs += " -ItemManager.ForceOwnAll true -Architect.ShowAllCategories true";
+
             LaunchGame(launchargs);
         }
 
@@ -118,6 +122,10 @@ namespace skateclub
 
             if (Settings.Default.HideWatermark)
                 launchargs += " -DelMarUI.EnableWatermark false";
+
+            //Thanks skate.online
+            if (Settings.Default.EnableCosmetic)
+                launchargs += " -ItemManager.ForceOwnAll true -Architect.ShowAllCategories true";
 
             //Solo Game
             LaunchGame(launchargs);
@@ -337,12 +345,7 @@ namespace skateclub
 
         private void ConnectButton_Click(object sender, RoutedEventArgs e)
         {
-            string launchargs = @"-DelMar.LocalPlayerDebugName " + Settings.Default.Playername + " -DelMarUI.EnableWatermark false -DelMarOnline.Enable false -Online.ClientIsPresenceEnabled false -Client.ServerIp " + IPText.Text;
-
-            if (Settings.Default.DX11)
-                launchargs += " -Render.ForceDx11 true";
-
-            LaunchGame(launchargs);
+            ConnectToServer(IPText.Text);
         }
 
         private void HostServerButton_Click(object sender, RoutedEventArgs e)
@@ -356,6 +359,7 @@ namespace skateclub
             Settings.Default.DX11 = ShadowFix.IsChecked.Value;
             Settings.Default.ShowFPS = ShowFPS.IsChecked.Value;
             Settings.Default.HideWatermark = HideWatermark.IsChecked.Value;
+            Settings.Default.EnableCosmetic = EnableCosmetic.IsChecked.Value;
             Settings.Default.Save();
 
             MainGrid.Visibility = Visibility.Visible;
@@ -371,6 +375,7 @@ namespace skateclub
             ShadowFix.IsChecked = Settings.Default.DX11;
             ShowFPS.IsChecked = Settings.Default.ShowFPS;
             HideWatermark.IsChecked = Settings.Default.HideWatermark;
+            EnableCosmetic.IsChecked = Settings.Default.EnableCosmetic;
 
             MainGrid.Visibility = Visibility.Hidden;
             InstallGrid.Visibility = Visibility.Hidden;

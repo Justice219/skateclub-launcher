@@ -70,5 +70,17 @@ namespace skateclub.Properties {
                 this["HideWatermark"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableCosmetic {
+            get {
+                return ((bool)(this["EnableCosmetic"]));
+            }
+            set {
+                this["EnableCosmetic"] = value;
+            }
+        }
     }
 }

@@ -301,7 +301,7 @@
             </Button>
         </Grid>
 
-        <Grid x:Name="SettingsGrid" Visibility="Hidden">
+        <Grid x:Name="SettingsGrid" Visibility="Visible">
             <Rectangle HorizontalAlignment="Center" Height="216" VerticalAlignment="Center" Width="1115" Fill="#7F1E1E1E" Visibility="Visible"/>
             <Label Content="Settings" HorizontalAlignment="Center" Margin="0,206,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontFamily="Calibri" FontSize="18"/>
             <Rectangle HorizontalAlignment="Center" Height="2" Margin="0,238,0,0" VerticalAlignment="Top" Width="298" Fill="#7FFFFFFF"/>
@@ -337,9 +337,10 @@
             <Label Content="Player Name" HorizontalAlignment="Left" Margin="408,240,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontFamily="Calibri"/>
             <CheckBox x:Name="ShowFPS" Content="Debug" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="408,309,0,0" Background="#FFFF214E" BorderBrush="#FF1E1E1E"/>
             <CheckBox x:Name="HideWatermark" Content="Hide Watermark" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="408,329,0,0" Background="#FFFF214E" BorderBrush="#FF1E1E1E" IsChecked="True"/>
+            <CheckBox x:Name="EnableCosmetic" Content="Enable Cosmetics" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Margin="408,349,0,0" Background="#FFFF214E" BorderBrush="#FF1E1E1E" IsChecked="True"/>
         </Grid>
 
-        <Grid x:Name="ServersGrid" Visibility="Visible">
+        <Grid x:Name="ServersGrid" Visibility="Hidden">
             <Rectangle HorizontalAlignment="Center" Height="476" Margin="0,136,0,0" VerticalAlignment="Top" Width="1077" Fill="#7F1E1E1E" Visibility="Visible"/>
             <Label Content="Skateclub Servers" HorizontalAlignment="Center" Margin="0,136,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontFamily="Calibri" FontSize="18"/>
             <Rectangle HorizontalAlignment="Center" Height="2" Margin="0,168,0,0" VerticalAlignment="Top" Width="1040" Fill="#7FFFFFFF"/>
